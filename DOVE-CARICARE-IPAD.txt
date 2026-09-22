@@ -1,0 +1,65 @@
+VX MMORPG WEB v0.2 — DOVE INSERIRE I FILE
+==========================================
+
+NON SOSTITUIRE ALLA CIECA IL WORKER vx-prime-esports ATTUALE.
+Il sito esistente deve restare intatto.
+
+STRUTTURA DA INTEGRARE NEL PROGETTO CLOUDFLARE ESISTENTE
+
+1) STATIC ASSETS DEL GIOCO
+Copia la cartella:
+  public/game/
+nel progetto del Worker vx-prime-esports.
+
+Devono risultare questi percorsi:
+  /game/index.html
+  /game/game.js
+  /game/game.css
+
+Quindi il gioco sarà raggiungibile come:
+  https://vx-prime-esports.vxprime.workers.dev/game/
+
+2) WORKER SERVER
+Il file:
+  src/index.js
+contiene il server WebSocket + Durable Object GameRoom.
+NON deve sostituire integralmente il Worker principale se questo contiene già la home/API vX.
+Bisogna fondere nel Worker principale:
+  - route /game/ws
+  - route /game/api/health
+  - export class GameRoom
+  - funzioni del game server
+
+3) CONFIGURAZIONE CLOUDFLARE
+Nel wrangler/config del Worker principale aggiungere:
+  assets.directory = ./public
+  assets.binding = ASSETS
+  assets.run_worker_first = /game/ws* e /game/api/*
+
+Binding Durable Object:
+  nome binding: GAME_ROOMS
+  classe: GameRoom
+  storage: sqlite
+
+4) SECRET CLOUDFLARE
+Nel Worker aggiungere come Secret, NON come variabile pubblica:
+  SUPABASE_SECRET_KEY
+
+Il valore deve essere inserito direttamente nel Dashboard Cloudflare.
+NON copiarlo nel codice, nel file ZIP o in chat.
+
+Variabili non segrete:
+  SUPABASE_URL = https://damzsqtlbnfsqmqsezlt.supabase.co
+  SUPABASE_PUBLISHABLE_KEY = la publishable key già presente nel progetto
+
+5) PULSANTE DEL SITO
+Nell'area riservata vX aggiungere il pulsante GIOCA che apre:
+  /game/
+
+Meglio aprire /game/ come pagina dedicata/fullscreen, non in un piccolo iframe.
+
+CONTROLLER
+- Collegare il controller dalle Impostazioni Bluetooth di iPad/iPhone.
+- Aprire /game/.
+- Premere una volta un pulsante del controller se Safari non lo rileva subito.
+- In alto a destra comparirà PLAYSTATION COLLEGATO / XBOX COLLEGATO / CONTROLLER COLLEGATO.

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#08090d" />
+  <title>VX MMORPG — Frontiera Imperiale</title>
+  <link rel="stylesheet" href="/game/game.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="launcher" class="screen launcher-screen">
+      <div class="ambient"></div>
+      <header class="launcher-head">
+        <div class="brand"><span class="vx">VX</span><span>MMORPG</span></div>
+        <div id="accountState" class="account-state">Verifica account…</div>
+      </header>
+
+      <main class="launcher-main">
+        <div class="hero-copy">
+          <p class="eyebrow">VX PRIME PRESENTA</p>
+          <h1>IL MONDO<br><em>DELL'ABISSO</em></h1>
+          <p class="lead">Crea il tuo eroe, scegli la dottrina e conquista la Frontiera Imperiale.</p>
+        </div>
+
+        <div id="loginGate" class="panel hidden">
+          <h2>ACCESSO RICHIESTO</h2>
+          <p>Devi accedere al tuo account vX PRIME prima di entrare nel gioco.</p>
+          <a class="primary-btn" href="/">TORNA AL SITO</a>
+        </div>
+
+        <div id="characterPanel" class="panel hidden">
+          <div class="panel-title-row">
+            <div><p class="eyebrow">ACCOUNT COLLEGATO</p><h2>I TUOI PERSONAGGI</h2></div>
+            <button id="newCharacterBtn" class="ghost-btn">+ CREA</button>
+          </div>
+          <div id="characterList" class="character-list"></div>
+        </div>
+      </main>
+    </section>
+
+    <section id="creator" class="screen creator-screen hidden">
+      <button id="creatorBack" class="back-btn">← INDIETRO</button>
+      <div class="creator-wrap">
+        <div class="creator-preview">
+          <div id="classSigil" class="class-sigil">VX</div>
+          <p class="eyebrow">NUOVO PERSONAGGIO</p>
+          <h2 id="classTitle">GUERRIERO IMPERIALE</h2>
+          <p id="classDescription"></p>
+          <div id="statBars" class="stats"></div>
+        </div>
+        <form id="creatorForm" class="panel creator-form">
+          <label>NOME PERSONAGGIO<input id="characterName" maxlength="18" minlength="3" autocomplete="off" placeholder="3–18 caratteri" required /></label>
+          <label>CLASSE<select id="classSelect"></select></label>
+          <div><span class="label">SESSO</span><div class="segmented"><button type="button" data-gender="male" class="active">UOMO</button><button type="button" data-gender="female">DONNA</button></div></div>
+          <p id="creatorError" class="error"></p>
+          <button class="primary-btn" type="submit">CREA PERSONAGGIO</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen hidden">
+      <canvas id="gameCanvas"></canvas>
+      <div class="hud top-left">
+        <div class="portrait"><span id="hudInitial">V</span></div>
+        <div class="hud-bars">
+          <div class="hud-name"><b id="hudName">Player</b><span id="hudLevel">Lv. 1</span></div>
+          <div class="bar hp"><i id="hpFill"></i><span id="hpText">100 / 100</span></div>
+          <div class="bar mp"><i id="mpFill"></i><span id="mpText">100 / 100</span></div>
+        </div>
+      </div>
+      <div class="hud top-right">
+        <div id="serverState" class="server-state">CONNESSIONE…</div>
+        <div id="controllerState" class="controller-state">PAD NON COLLEGATO</div>
+        <div class="currency"><span>◈</span><b id="goldText">0</b></div>
+      </div>
+      <div class="controller-help">
+        <b>CONTROLLER</b>
+        <span>LS Muovi</span><span>RS Camera</span><span>A/✕ Attacco</span><span>LB/L1 Skill 1</span><span>RB/R1 Skill 2</span><span>R3 Lock</span><span>B/○ Sblocca</span>
+      </div>
+      <div id="targetPanel" class="target-panel hidden"><b id="targetName">Nemico</b><div class="bar enemy"><i id="targetHpFill"></i></div></div>
+      <div id="toast" class="toast"></div>
+      <div class="quest-chip"><span>MISSIONE</span><b>Prima Sangue</b><small>Sconfiggi 3 Lupi della Frattura</small><strong id="questProgress">0 / 3</strong></div>
+      <button id="exitGame" class="exit-btn">ESCI</button>
+
+      <div id="joystick" class="joystick"><div id="stick"></div></div>
+      <div class="action-cluster">
+        <button id="skill1" class="skill"><span>1</span><small>FENDENTE</small></button>
+        <button id="skill2" class="skill"><span>2</span><small>IMPETO</small></button>
+        <button id="attackBtn" class="attack-btn">⚔</button>
+      </div>
+    </section>
+  </div>
+
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}
+  </script>
+  <script type="module" src="/game/game.js"></script>
+</body>
+</html>

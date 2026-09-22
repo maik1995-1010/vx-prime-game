@@ -1,0 +1,20 @@
+Database game già applicato al progetto Supabase damzsqtlbnfsqmqsezlt il 22/09/2026.
+
+Tabelle:
+- vx_game_classes
+- vx_game_doctrines
+- vx_game_skills
+- vx_game_maps
+- vx_game_monsters
+- vx_game_item_catalog
+- vx_game_characters
+- vx_game_items
+- vx_game_audit_events
+
+RPC client autenticato:
+- vx_game_create_character(text,text,text)
+- vx_game_choose_doctrine(uuid,text)
+
+RPC solo server/service_role:
+- vx_game_server_save_state(...)
+- vx_game_server_award_reward(...)
